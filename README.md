@@ -19,6 +19,10 @@ ads.ReadRaw(ch)
 ads.RawToVoltage();
 
 //ch is the channel you want to read from it is a (int)
+// 0 = AIN0
+// 1 = AIN1
+// 2 = AIN2
+// 3 = AIN3 
 float v = ads.RawToVoltage(ads.ReadRaw(ch));
 ```
 ```cpp
