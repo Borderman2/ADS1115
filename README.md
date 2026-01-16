@@ -7,10 +7,21 @@ How to use this class
 
 //Create the Class
 ADS1115 ads;
+```
+```cpp
 //U can also create it with pins specified
 //if you have it not connected to the default gpio pins (GP4/GP5)
 ADS1115 ads(pins[x],size);
+```
+```cpp
+//To use this class there are two functions you need to use
+ads.ReadRaw(ch)
+ads.RawToVoltage();
 
+//ch is the channel you want to read from it is a (int)
+float v = ads.RawToVoltage(ads.ReadRaw(ch));
+
+```cpp
 //if you have multiple ads1115 you can change the address of them by doing this
 ads.m_Settings.Address = ADS_ADDR_VDD;
 //These are the other options
