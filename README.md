@@ -20,7 +20,7 @@ ads.RawToVoltage();
 
 //ch is the channel you want to read from it is a (int)
 float v = ads.RawToVoltage(ads.ReadRaw(ch));
-
+```
 ```cpp
 //if you have multiple ads1115 you can change the address of them by doing this
 ads.m_Settings.Address = ADS_ADDR_VDD;
