@@ -76,9 +76,24 @@ int16_t ADS1115::ReadRaw(uint8_t channel)
 
     i2c_write_blocking(i2c0, m_Settings.Address, cfg, 3, false);
 
-    // 3. Warten bis Messung fertig
-    sleep_ms(9);                   // sicher für 128 SPS
+    if (m_Settings.Mode == ADS_MODE_SINGLESHOT)
+    {
 
+        switch (m_Settings.DataRate)
+        {
+            case ADS_DR_8SPS:   sleep_ms(125); break;
+            case ADS_DR_16SPS:  sleep_ms(63);  break;
+            case ADS_DR_32SPS:  sleep_ms(32);  break;
+            case ADS_DR_64SPS:  sleep_ms(16);  break;
+            case ADS_DR_128SPS: sleep_ms(8);   break;
+            case ADS_DR_250SPS: sleep_ms(4);   break;
+            case ADS_DR_475SPS: sleep_ms(3);   break;
+            case ADS_DR_860SPS: sleep_ms(2);   break;
+            default:            sleep_ms(125); break;
+        }
+    }   
+
+    //printf("DATA RATE : %d",m_Settings.DataRate);
     // 4. Messwert lesen
     uint8_t reg = 0x00;            // Conversion-Register
     uint8_t data[2];
